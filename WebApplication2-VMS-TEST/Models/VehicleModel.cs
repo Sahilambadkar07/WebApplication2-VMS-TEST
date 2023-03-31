@@ -42,7 +42,7 @@ namespace WebApplication2_VMS_TEST.Models
 
         public DateTime? LastServiceDate { get; set; }
 
-        public decimal? LastServiceCharge { get; set; }
+        public decimal LastServiceCharge { get; set; }
 
         [Required]
         public decimal FuelAmount { get; set; }

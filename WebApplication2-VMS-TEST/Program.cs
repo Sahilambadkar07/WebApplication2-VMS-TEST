@@ -17,6 +17,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IVehicleRepository,VehicleRepository>();
 builder.Services.AddScoped<IDailyActivityRepository,DailyActivityRepository>();
 builder.Services.AddScoped<IMaintenanceExpenseRepository,MaintenanceExpenseRepository>();
+builder.Services.AddScoped<IDashBoardRepository,DashBoardRepository>();
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))

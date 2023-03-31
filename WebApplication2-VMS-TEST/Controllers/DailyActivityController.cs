@@ -51,21 +51,21 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(activity);
         }
 
-        [HttpGet("GetCurrentOdodmeterReading")]
-        [ProducesResponseType(200, Type = typeof(int))]
-        public IActionResult GetCurrentOdodmeterReading()
-        {
-            var odo  = _dailyActivityRepository.GetCurrentOdodmeterReading();
-            return Ok(odo);
-        }
+        //[HttpGet("GetCurrentOdodmeterReading")]
+        //[ProducesResponseType(200, Type = typeof(int))]
+        //public IActionResult GetCurrentOdodmeterReading([FromQuery] int vehicleid)
+        //{
+        //    var odo  = _dailyActivityRepository.GetCurrentOdodmeterReading(vehicleid);
+        //    return Ok(odo);
+        //}
 
-        [HttpGet("GetRemainingFuelAmount")]
-        [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult GetRemainingFuelAmount()
-        {
-            var fuelAmount = _dailyActivityRepository.GetRemainingFuelAmount();
-            return Ok(fuelAmount);
-        }
+        //[HttpGet("GetRemainingFuelAmount")]
+        //[ProducesResponseType(200, Type = typeof(decimal))]
+        //public IActionResult GetRemainingFuelAmount(int vehicleid)
+        //{
+        //    var fuelAmount = _dailyActivityRepository.GetRemainingFuelAmount(ve);
+        //    return Ok(fuelAmount);
+        //}
 
         [HttpPost]
         [ProducesResponseType(204)]

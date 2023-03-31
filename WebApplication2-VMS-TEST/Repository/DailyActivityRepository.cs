@@ -17,10 +17,18 @@ namespace WebApplication2_VMS_TEST.Repository
             return _context.DailyActivities.OrderBy(x => x.DailyActivityId).ToList();
         }
 
+
         DailyActivityModel IDailyActivityRepository.GetDailyActivityById(int id)
         {
             return _context.DailyActivities.Where(x => x.DailyActivityId == id).FirstOrDefault();
         }
+
+    
+        ICollection<DailyActivityModel> IDailyActivityRepository.GetDailyActivityByVehicleId(int vehicleid)
+        {
+            return _context.DailyActivities.Where(x => x.VehicleId == vehicleid).ToList();
+        }
+
         bool IDailyActivityRepository.DailyActivityExist(int id)
         {
             return _context.DailyActivities.Any(x=>x.DailyActivityId == id);
@@ -38,14 +46,18 @@ namespace WebApplication2_VMS_TEST.Repository
             return saved > 0 ? true : false;
         }
 
-        public int GetCurrentOdodmeterReading()
-        {
-            return _context.DailyActivities.OrderByDescending(c=>c.DailyActivityId).Select(x=>x.OdometerReading).FirstOrDefault();
-        }
 
-        public decimal GetRemainingFuelAmount()
-        {
-            return _context.DailyActivities.OrderBy(c=>c.DailyActivityId).Select(x=>x.AmountOfFuel).FirstOrDefault();   
-        }
+        //public int GetCurrentOdodmeterReading(int vehicleid)
+        //{
+        //    //var vehicle = _context.DailyActivities.OrderByDescending(c=>c.DailyActivityId).Select(x=>x.OdometerReading).FirstOrDefault();
+        //    var vehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid);
+        //    return vehicle.OrderByDescending(c=>c.DailyActivityId).Select(x=>x.OdometerReading).FirstOrDefault();
+        //}
+
+        //public decimal GetRemainingFuelAmount(int vehicleid)
+        //{
+        //    var vehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid);
+        //    return vehicle.OrderBy(c=>c.DailyActivityId).Select(x=>x.AmountOfFuel).FirstOrDefault();   
+        //}
     }
 }

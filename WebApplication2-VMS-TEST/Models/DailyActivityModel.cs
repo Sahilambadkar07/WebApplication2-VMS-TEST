@@ -23,7 +23,7 @@ namespace WebApplication2_VMS_TEST.Models
         public DateTime Date { get; set; }
 
         [Required]
-        public int OdometerReading { get; set; }
+        public int OdometerReading { get; set; } //validation that vehicle.odo <= dailyact.odo
 
         [Required]
         public decimal RunningHours { get; set; }
@@ -42,5 +42,6 @@ namespace WebApplication2_VMS_TEST.Models
         public decimal MaintenanceExpense { get; set; }
 
         public DateTime ServiceDate { get; set; }
+
     }
 }
