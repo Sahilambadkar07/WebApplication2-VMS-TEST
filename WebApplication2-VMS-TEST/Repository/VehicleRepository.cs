@@ -28,6 +28,11 @@ namespace WebApplication2_VMS_TEST.Repository
             return _context.Vehicles.Where(x => x.VehicleId == id).FirstOrDefault();
         }
 
+        public ICollection<VehicleModel> GetVehicleByUserId(int userid)
+        {
+            return _context.Vehicles.Where(x=>x.UserId == userid).ToList();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

@@ -33,7 +33,7 @@ namespace WebApplication2_VMS_TEST.Repository
             //set the date range ()start date and the end date also the default date range.
 
             var dailyactivityOfVehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid && x.Date >= startdate && x.Date <= enddate);
-            var sum = dailyactivityOfVehicle.Sum(x => x.FuelFilled - x.AmountOfFuel);
+            var sum = dailyactivityOfVehicle.Sum(x => Math.Abs(x.FuelFilled - x.AmountOfFuel));
             var odo = dailyactivityOfVehicle.OrderByDescending(c => c.DailyActivityId).Select(x => x.OdometerReading).FirstOrDefault();
             if (odo == 0)
             {
@@ -70,7 +70,7 @@ namespace WebApplication2_VMS_TEST.Repository
         public decimal TotalExpPerDay(int vehicleid, DateTime? startdate, DateTime? enddate)
         {
             var dailyactivityOfVehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid && x.Date >= startdate && x.Date <= enddate);
-            var count = _context.DailyActivities.Where(x => x.VehicleId == vehicleid && x.Date >= startdate && x.Date <= enddate).Count();
+            var count = dailyactivityOfVehicle.Count();
 
             if (count == 0)
             {
@@ -101,7 +101,48 @@ namespace WebApplication2_VMS_TEST.Repository
 
         }
 
+        public decimal KmPerDay(int vehicleid, DateTime? startdate, DateTime? enddate)
+        {
+            var dailyactivityOfVehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid && x.Date >= startdate && x.Date <= enddate);
+            var count = dailyactivityOfVehicle.Count();
 
+            if (count == 0)
+            {
+                return 0;
+            }
+            var odo = dailyactivityOfVehicle.OrderByDescending(c => c.DailyActivityId).Select(x => x.OdometerReading).First();
+
+            return (odo / count);
+        }
+
+        public decimal AvgFuelComPerDay(int vehicleid, DateTime? startdate, DateTime? enddate)
+        {
+            var dailyactivityOfVehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid && x.Date >= startdate && x.Date <= enddate);
+            var count = dailyactivityOfVehicle.Count();
+
+            if (count == 0)
+            {
+                return 0;
+            }
+            var sum = dailyactivityOfVehicle.Sum(x => Math.Abs(x.FuelFilled - x.AmountOfFuel));
+
+            return (sum / count);
+
+        }
+
+        public decimal AvgMaintPerDay(int vehicleid, DateTime? startdate, DateTime? enddate)
+        {
+            var dailyactivityOfVehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid && x.Date >= startdate && x.Date <= enddate);
+            var count = dailyactivityOfVehicle.Count();
+
+            if (count == 0)
+            {
+                return 0;
+            }
+            var sum = dailyactivityOfVehicle.Sum(x => x.MaintenanceExpense);
+            return (sum / count);
+
+        }
     }
 }
 

@@ -193,5 +193,80 @@ namespace WebApplication2_VMS_TEST.Controllers
             var rsperkm = _dashboardRepository.RsPerKm(vehicleid, startdate, enddate);
             return Ok(rsperkm);
         }
+
+        [HttpGet("KmPerDay")]
+        [ProducesResponseType(200, Type = typeof(decimal))]
+        public IActionResult KmPerDay([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        {
+            if (startdate == null && enddate == null)
+            {
+                enddate = DateTime.Now;
+                DateTime end = enddate.Value;
+                startdate = new DateTime(end.Year, end.Month, 1);
+            }
+            if (startdate == null)
+            {
+                DateTime end = enddate.Value;
+                startdate = new DateTime(end.Year, end.Month, 1);
+            }
+            if (enddate == null)
+            {
+                DateTime start = startdate.Value;
+                int day = DateTime.DaysInMonth(start.Year, start.Month);
+                enddate = new DateTime(start.Year, start.Month, day);
+            }
+            var kmperday = _dashboardRepository.KmPerDay(vehicleid, startdate, enddate);
+            return Ok(kmperday);
+        }
+
+        [HttpGet("FuelComPerDay")]
+        [ProducesResponseType(200, Type = typeof(decimal))]
+        public IActionResult FuelComPerDay([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        {
+            if (startdate == null && enddate == null)
+            {
+                enddate = DateTime.Now;
+                DateTime end = enddate.Value;
+                startdate = new DateTime(end.Year, end.Month, 1);
+            }
+            if (startdate == null)
+            {
+                DateTime end = enddate.Value;
+                startdate = new DateTime(end.Year, end.Month, 1);
+            }
+            if (enddate == null)
+            {
+                DateTime start = startdate.Value;
+                int day = DateTime.DaysInMonth(start.Year, start.Month);
+                enddate = new DateTime(start.Year, start.Month, day);
+            }
+            var fuelcomPerday = _dashboardRepository.AvgFuelComPerDay(vehicleid, startdate, enddate);
+            return Ok(fuelcomPerday);
+        }
+
+        [HttpGet("MaintCostPerDay")]
+        [ProducesResponseType(200, Type = typeof(decimal))]
+        public IActionResult MaintCostPerDay([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        {
+            if (startdate == null && enddate == null)
+            {
+                enddate = DateTime.Now;
+                DateTime end = enddate.Value;
+                startdate = new DateTime(end.Year, end.Month, 1);
+            }
+            if (startdate == null)
+            {
+                DateTime end = enddate.Value;
+                startdate = new DateTime(end.Year, end.Month, 1);
+            }
+            if (enddate == null)
+            {
+                DateTime start = startdate.Value;
+                int day = DateTime.DaysInMonth(start.Year, start.Month);
+                enddate = new DateTime(start.Year, start.Month, day);
+            }
+            var maintcostperday = _dashboardRepository.AvgMaintPerDay(vehicleid, startdate, enddate);
+            return Ok(maintcostperday);
+        }
     }
 }

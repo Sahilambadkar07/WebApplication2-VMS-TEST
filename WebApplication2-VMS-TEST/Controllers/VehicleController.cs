@@ -34,6 +34,22 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(vehicle);
         }
 
+        [HttpGet("GetVehicleByUserID/{UserId}")]
+        [ProducesResponseType(200, Type = typeof(VehicleModel))]
+        public IActionResult GetVehicleByUserId(int UserId)
+        {
+            var vehicle = _mapper.Map<List<VehicleDto>>(_vehicleRepository.GetVehicleByUserId(UserId));
+            if (!_vehicleRepository.VehicleExist(UserId))
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(vehicle);
+        }
+
 
         [HttpGet("{vehicleId}")]
         [ProducesResponseType(200, Type = typeof(VehicleModel))]

@@ -18,6 +18,12 @@ namespace WebApplication2_VMS_TEST.Interfaces
         public decimal TotalExpPerDay(int vehicleid, DateTime? startdate, DateTime? enddate);
 
         public decimal RsPerKm(int vehicleid, DateTime? startdate, DateTime? enddate);
+        
+        public decimal KmPerDay(int vehicleid, DateTime? startdate, DateTime? enddate);
+
+        public decimal AvgFuelComPerDay(int vehicleid, DateTime? startdate, DateTime? enddate);
+
+        public decimal AvgMaintPerDay(int vehicleid, DateTime? startdate, DateTime? enddate);
 
         //IEnumerable<TabularViewDto> GetDailyActivitiesWithDTO();
         //public Task<List<DailyActivityModel>> GetAllAsync(int vehicleid);
