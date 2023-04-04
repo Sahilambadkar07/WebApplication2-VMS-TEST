@@ -1,5 +1,8 @@
 ﻿1. OnDelete for foreign key raltionships
 2. validation for the vehicle.odo and dailact.odo (vehicle.odo <= dailact.odo) for the rest of the field also
 3. Date check for nulls the according to that set the start date and the end date also the default date range.
+4. in login controller if the user is null implement the logic 
+5. storing the the password hashes.
+
 
 

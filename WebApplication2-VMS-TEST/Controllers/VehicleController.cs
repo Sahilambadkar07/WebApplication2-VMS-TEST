@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2_VMS_TEST.Dto;
 using WebApplication2_VMS_TEST.Interfaces;
 using WebApplication2_VMS_TEST.Models;
-using WebApplication2_VMS_TEST.Repository;
 
 namespace WebApplication2_VMS_TEST.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VehicleController : Controller
     {
         private readonly IVehicleRepository _vehicleRepository;
@@ -21,7 +22,7 @@ namespace WebApplication2_VMS_TEST.Controllers
             _userRepository = userRepository;
             _mapper = mapper;
         }
-
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<VehicleModel>))]
         public IActionResult GetVehicle()

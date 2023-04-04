@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 using WebApplication2_VMS_TEST.Dto;
@@ -10,6 +11,7 @@ namespace WebApplication2_VMS_TEST.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DashBoardController : Controller
     {
         private readonly IDashBoardRepository _dashboardRepository;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2_VMS_TEST.Data;
 using WebApplication2_VMS_TEST.Dto;
@@ -10,6 +11,7 @@ namespace WebApplication2_VMS_TEST.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DailyActivityController : Controller
     {
         private readonly IDailyActivityRepository _dailyActivityRepository;

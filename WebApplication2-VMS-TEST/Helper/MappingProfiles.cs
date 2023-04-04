@@ -13,6 +13,7 @@ namespace WebApplication2_VMS_TEST.Helper
         {
             
             CreateMap<UserModel, UserDto>();
+            CreateMap<UserModel, UserLoginDto>();
             CreateMap<UserDto, UserModel>();
 
             CreateMap<VehicleModel, VehicleDto>();
@@ -21,9 +22,6 @@ namespace WebApplication2_VMS_TEST.Helper
             CreateMap<DailyActivityDto, DailyActivityModel>();
             CreateMap<DailyActivityModel, DailyActivityDto>();
 
-            //CreateMap <DailyActivityModel,TabularViewDto>();
-            // CreateMap<DailyActivityModel, TabularViewDto>()
-            //.ForMember(dest => dest.KmRun, opt => opt.MapFrom(src => src.OdometerReading - GetPreviousOdometerReading(src.VehicleId, src.DailyActivityId)));
 
             CreateMap<DailyActivityModel, TabularViewDto>()
             .ForMember(dest => dest.KmRun, opt => opt.MapFrom(src => 0));
@@ -33,14 +31,5 @@ namespace WebApplication2_VMS_TEST.Helper
 
         }
 
-        //private int GetPreviousOdometerReading(int vehicleId, int dailyacti_id)
-        //{
-        //    var previousDailyActivity = _context.DailyActivities
-        //        .Where(d => d.VehicleId == vehicleId)
-        //        .OrderByDescending(d => d.DailyActivityId)
-        //        .FirstOrDefault();
-
-        //    return previousDailyActivity?.OdometerReading ?? 0;
-        //}
     }
 }

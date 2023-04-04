@@ -20,12 +20,16 @@ namespace WebApplication2_VMS_TEST.Repository
 
         public ICollection<UserModel> GetUser()
         {
-             return _context.Users.OrderBy(x => x.UserId).ToList();
+            return _context.Users.OrderBy(x => x.UserId).ToList();
         }
 
         public UserModel GetUserById(int id)
         {
             return _context.Users.Where(x => x.UserId == id).FirstOrDefault();
+        }
+        public UserModel GetUserByUsername(string username)
+        {
+            return _context.Users.Where(x => x.Username.ToLower() == username.ToLower()).FirstOrDefault();
         }
 
         public bool Save()

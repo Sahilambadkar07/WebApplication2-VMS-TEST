@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2_VMS_TEST.Dto;
 using WebApplication2_VMS_TEST.Interfaces;
@@ -9,6 +10,7 @@ namespace WebApplication2_VMS_TEST.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
 
     public class MaintenanceExpenseController : Controller
     {
