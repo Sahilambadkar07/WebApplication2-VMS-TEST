@@ -101,7 +101,24 @@ namespace WebApplication2_VMS_TEST.Controllers
                 return StatusCode(422, ModelState);
             }
 
+            var activitywithvehicleid = _dailyActivityRepository.GetDailyActivity().Where(c => c.VehicleId == dailyActivitycreate.VehicleId).FirstOrDefault();
+            if(activitywithvehicleid == null)
+            {
+                var vehicle = _vehicleRepository.GetVehicleById(dailyActivitycreate.VehicleId);
+                if(dailyActivitycreate.OdometerReading < vehicle.OdometerReading)
+                {
+                    dailyActivitycreate.OdometerReading = vehicle.OdometerReading;  
+                }
+            }
+            else if(activitywithvehicleid != null)
+            {
+                var prevactivity = _dailyActivityRepository.GetDailyActivity().OrderByDescending(x => x.Date).Where(c => c.VehicleId == dailyActivitycreate.VehicleId).FirstOrDefault();
 
+                if (dailyActivitycreate.OdometerReading< prevactivity.OdometerReading)
+                {
+                    return Ok("Conflict in OdoMeter Reading");
+                }
+            }
             if (!_dailyActivityRepository.CreateDailyActivity(ActivityMap))
             {
                 ModelState.AddModelError("", "Activity is not Created [VEHICLECONTOLLER]");

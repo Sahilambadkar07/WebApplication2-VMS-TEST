@@ -5,6 +5,7 @@ using WebApplication2_VMS_TEST.Interfaces;
 using WebApplication2_VMS_TEST.Dto;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApplication2_VMS_TEST.Controllers
 {
@@ -22,11 +23,18 @@ namespace WebApplication2_VMS_TEST.Controllers
 
         private UserLoginDto? AuthenticateUser(UserLoginDto user)
         {
-            var User = _userRepository;
-            if (User == null)
+            var _user = _userRepository.GetUserByUsername(user.Username);
+            var passwordHasher = new PasswordHasher<UserLoginDto>();
+
+            var success = (passwordHasher.VerifyHashedPassword(null, _user.Password, user.Password) == PasswordVerificationResult.Success);
+            if (_user == null )
             {
                 return null;
                 // if nulls then what ..implemet it later
+            }
+            if (!success)
+            {
+                return null;
             }
             return user;
         }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using WebApplication2_VMS_TEST.Dto;
@@ -73,7 +74,10 @@ namespace WebApplication2_VMS_TEST.Controllers
                 return BadRequest(ModelState);
             }
 
+            var passwordHasher = new PasswordHasher<UserDto>();
+            usercreate.Password = passwordHasher.HashPassword(null, usercreate.Password);
             var userMap = _mapper.Map<UserModel>(usercreate);
+            
             if (!_userRepository.CreateUser(userMap))
             {
                 ModelState.AddModelError("", "User is not Created [USERCONTOLLER]");
