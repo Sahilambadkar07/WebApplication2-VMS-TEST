@@ -36,7 +36,7 @@ namespace WebApplication2_VMS_TEST.Controllers
         }
 
         [HttpGet("GetVehicleByUserID/{UserId}")]
-        [ProducesResponseType(200, Type = typeof(VehicleModel))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<VehicleModel>))]
         public IActionResult GetVehicleByUserId(int UserId)
         {
             var vehicle = _mapper.Map<List<VehicleDto>>(_vehicleRepository.GetVehicleByUserId(UserId));

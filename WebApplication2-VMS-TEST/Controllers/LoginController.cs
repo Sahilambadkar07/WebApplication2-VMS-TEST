@@ -6,6 +6,8 @@ using WebApplication2_VMS_TEST.Dto;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Identity;
+using WebApplication2_VMS_TEST.Models;
+using AutoMapper;
 
 namespace WebApplication2_VMS_TEST.Controllers
 {
@@ -14,16 +16,20 @@ namespace WebApplication2_VMS_TEST.Controllers
     public class LoginController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
         private IConfiguration _config;
-        public LoginController(IConfiguration config, IUserRepository userRepository)
+        public LoginController(IConfiguration config, IUserRepository userRepository ,IMapper mapper)
         {
             _config = config;
+            _mapper = mapper;
             _userRepository = userRepository;
         }
 
-        private UserLoginDto? AuthenticateUser(UserLoginDto user)
+        private UserModel? AuthenticateUser(UserLoginDto user)
         {
-            var _user = _userRepository.GetUserByUsername(user.Username);
+            var _user = (_userRepository.GetUserByUsername(user.Username));
+            //var _user = _mapper.Map<UserDto>(_userRepository.GetUserByUsername(user.Username));
+            
             var passwordHasher = new PasswordHasher<UserLoginDto>();
 
             var success = (passwordHasher.VerifyHashedPassword(null, _user.Password, user.Password) == PasswordVerificationResult.Success);
@@ -36,7 +42,7 @@ namespace WebApplication2_VMS_TEST.Controllers
             {
                 return null;
             }
-            return user;
+            return _user;
         }
 
         private string GenerateToken(UserLoginDto user)
@@ -55,14 +61,17 @@ namespace WebApplication2_VMS_TEST.Controllers
         [HttpPost]
         public IActionResult Login(UserLoginDto user)
         {
-            IActionResult response = Unauthorized();
+            IActionResult response = null;
+            var token = "";
+
             var _user = AuthenticateUser(user);
+            //return Ok(_user);
             if (_user != null)
             {
-                var token =  GenerateToken(_user);
+                token =  GenerateToken(_mapper.Map<UserLoginDto>(_user));
                 response = Ok(new { token = token });
             }
-            return response;
+            return Ok( new { token = token,user = _user } );
         }
     }
 }

@@ -41,6 +41,19 @@ builder.Services.AddSwaggerGen(options=>
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.WithOrigins("*")
+                   .SetIsOriginAllowedToAllowWildcardSubdomains()
+                   .WithMethods("GET", "POST")
+                   .WithHeaders("Content-Type", "Authorization")
+                   .SetPreflightMaxAge(TimeSpan.FromMinutes(10));
+        });
+});
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IDailyActivityRepository, DailyActivityRepository>();
@@ -63,8 +76,9 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAllOrigins");
 app.UseAuthentication();
-//app.UseAuthorization();
+app.UseAuthorization();
 
 app.MapControllers();
 
