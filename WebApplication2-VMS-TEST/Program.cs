@@ -27,6 +27,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.WithOrigins("*")
+                   .SetIsOriginAllowedToAllowWildcardSubdomains()
+                   .WithMethods("GET", "POST")
+                   .WithHeaders("Content-Type", "Authorization")
+                   .SetPreflightMaxAge(TimeSpan.FromMinutes(10));
+        });
+});
+
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options=>
@@ -74,7 +89,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-
+app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
 app.UseCors("AllowAllOrigins");
 app.UseAuthentication();

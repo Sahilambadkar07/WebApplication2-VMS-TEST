@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginPage = ({setIsLoggedInFunc}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
     // TODO: Replace with actual authentication logic here
     if (username === 'admin' && password === 'password') {
-      setIsLoggedIn(true);
+      setIsLoggedInFunc(true);
+      navigate('/Dashboard')
+      // return <Navigate to="/Dashboard" />;
     } else {
       alert('Invalid username or password');
     }
   };
 
-  if (isLoggedIn) {
-    return <div>You are now logged in!</div>;
-  }
+  
 
   return (
     <div className="login-page">

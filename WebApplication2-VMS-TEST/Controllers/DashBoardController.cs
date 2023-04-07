@@ -11,7 +11,7 @@ namespace WebApplication2_VMS_TEST.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class DashBoardController : Controller
     {
         private readonly IDashBoardRepository _dashboardRepository;

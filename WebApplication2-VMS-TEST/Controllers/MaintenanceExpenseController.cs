@@ -10,7 +10,7 @@ namespace WebApplication2_VMS_TEST.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
 
     public class MaintenanceExpenseController : Controller
     {
