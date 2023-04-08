@@ -1,4 +1,5 @@
-﻿using WebApplication2_VMS_TEST.Models;
+﻿using WebApplication2_VMS_TEST.Dto;
+using WebApplication2_VMS_TEST.Models;
 namespace WebApplication2_VMS_TEST.Interfaces
 {
     public interface IUserRepository

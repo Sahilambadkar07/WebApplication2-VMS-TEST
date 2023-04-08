@@ -26,7 +26,7 @@ namespace WebApplication2_VMS_TEST.Repository
     
         ICollection<DailyActivityModel> IDailyActivityRepository.GetDailyActivityByVehicleId(int vehicleid)
         {
-            return _context.DailyActivities.Where(x => x.VehicleId == vehicleid).ToList();
+            return _context.DailyActivities.OrderBy(c=>c.Date).Where(x => x.VehicleId == vehicleid).ToList();
         }
 
         bool IDailyActivityRepository.DailyActivityExist(int id)

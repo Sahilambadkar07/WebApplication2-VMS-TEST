@@ -52,7 +52,7 @@ namespace WebApplication2_VMS_TEST.Controllers
         }
 
 
-        [HttpGet("{vehicleId}")]
+        [HttpGet("GetVehicleByVehicleId/{vehicleId}")]
         [ProducesResponseType(200, Type = typeof(VehicleModel))]
         public IActionResult GetVehicle(int vehicleId)
         {

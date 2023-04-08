@@ -1,6 +1,8 @@
 ﻿using WebApplication2_VMS_TEST.Data;
 using WebApplication2_VMS_TEST.Models;
 using WebApplication2_VMS_TEST.Interfaces;
+using WebApplication2_VMS_TEST.Dto;
+
 namespace WebApplication2_VMS_TEST.Repository
 
 {

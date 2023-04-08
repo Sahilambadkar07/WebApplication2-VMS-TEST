@@ -52,6 +52,19 @@ namespace WebApplication2_VMS_TEST.Controllers
             }
             return Ok(activity);
         }
+        [HttpGet("GetDaily_Activity_By_VehicleId/{vehicleid}")]
+        [ProducesResponseType(200, Type = typeof(DailyActivityModel))]
+
+        public IActionResult GetDailyActivityByvehicleId(int vehicleid)
+        {
+            var activity = _mapper.Map<List<DailyActivityDto>>(_dailyActivityRepository.GetDailyActivityByVehicleId(vehicleid));
+           
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(activity);
+        }
 
         //[HttpGet("GetCurrentOdodmeterReading")]
         //[ProducesResponseType(200, Type = typeof(int))]

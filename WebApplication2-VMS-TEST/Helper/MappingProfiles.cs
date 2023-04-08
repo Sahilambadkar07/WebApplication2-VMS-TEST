@@ -13,8 +13,10 @@ namespace WebApplication2_VMS_TEST.Helper
         {
             
             CreateMap<UserModel, UserDto>();
-            CreateMap<UserModel, UserLoginDto>();
             CreateMap<UserDto, UserModel>();
+
+            CreateMap<UserModel, UserLoginDto>();
+            CreateMap<UserLoginDto,UserModel>();
 
             CreateMap<VehicleModel, VehicleDto>();
             CreateMap<VehicleDto, VehicleModel>();
