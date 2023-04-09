@@ -50,7 +50,7 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(user);
         }
 
-        [HttpPost]
+        [HttpPost("CreateUser")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
 

@@ -26,25 +26,25 @@ namespace WebApplication2_VMS_TEST.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetCurrentOdodmeterReading")]
+        [HttpGet("GetCurrentOdodmeterReading/{vehicleid}")]
         [ProducesResponseType(200, Type = typeof(int))]
-        public IActionResult GetCurrentOdodmeterReading([FromQuery] int vehicleid)
+        public IActionResult GetCurrentOdodmeterReading(int vehicleid)
         {
             var odo = _dashboardRepository.GetCurrentOdodmeterReading(vehicleid);
             return Ok(odo);
         }
 
-        [HttpGet("GetRemainingFuelAmount")]
+        [HttpGet("GetRemainingFuelAmount/{vehicleid}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult GetRemainingFuelAmount([FromQuery] int vehicleid)
+        public IActionResult GetRemainingFuelAmount(int vehicleid)
         {
             var fuelAmount = _dashboardRepository.GetRemainingFuelAmount(vehicleid);
             return Ok(fuelAmount);
         }
 
-        [HttpGet("Avg_Km/Ltr")]
+        [HttpGet("Avg_Km_Per_Ltr/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult Average_Km_Ltr([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        public IActionResult Average_Km_Ltr(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
             if (startdate == null && enddate == null)
             {
@@ -68,9 +68,9 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(avg);
         }
 
-        [HttpGet("FuelExpenses")]
+        [HttpGet("FuelExpenses/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult FuelExpenses([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        public IActionResult FuelExpenses(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
             if (startdate == null && enddate == null)
             {
@@ -95,9 +95,9 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(expense);
         }
 
-        [HttpGet("MaintExpenses")]
+        [HttpGet("MaintExpenses/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult MaintExpenses([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        public IActionResult MaintExpenses(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
             if (startdate == null && enddate == null)
             {
@@ -120,10 +120,12 @@ namespace WebApplication2_VMS_TEST.Controllers
             var expense = _dashboardRepository.MaintExpenses(vehicleid, startdate, enddate);
             return Ok(expense);
         }
+        
+        // date filtering is remaining
 
-        [HttpGet("Tabularview")]
+        [HttpGet("Tabularview/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<DailyActivityModel>))]
-        public IActionResult GetTabularView([FromQuery] int vehicleid)
+        public IActionResult GetTabularView(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
             var dailyActivities = _dailyActivityRepository.GetDailyActivityByVehicleId(vehicleid);
             var tabularViewDtoList = _mapper.Map<List<TabularViewDto>>(dailyActivities);
@@ -146,9 +148,9 @@ namespace WebApplication2_VMS_TEST.Controllers
         }
 
 
-        [HttpGet("TotalExpPerDay")]
+        [HttpGet("TotalExpPerDay/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult TotalExpPerDay([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        public IActionResult TotalExpPerDay(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
             if (startdate == null && enddate == null)
             {
@@ -171,9 +173,9 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(totalexpperdat);  
         }
 
-        [HttpGet("RsPerKm")]
+        [HttpGet("RsPerKm/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult RsPerKm([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        public IActionResult RsPerKm(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
             if (startdate == null && enddate == null)
             {
@@ -196,9 +198,9 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(rsperkm);
         }
 
-        [HttpGet("KmPerDay")]
+        [HttpGet("KmPerDay/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult KmPerDay([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        public IActionResult KmPerDay(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
             if (startdate == null && enddate == null)
             {
@@ -221,9 +223,9 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(kmperday);
         }
 
-        [HttpGet("FuelComPerDay")]
+        [HttpGet("FuelComPerDay/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult FuelComPerDay([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        public IActionResult FuelComPerDay(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
             if (startdate == null && enddate == null)
             {
@@ -246,9 +248,9 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(fuelcomPerday);
         }
 
-        [HttpGet("MaintCostPerDay")]
+        [HttpGet("MaintCostPerDay/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
-        public IActionResult MaintCostPerDay([FromQuery] int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
+        public IActionResult MaintCostPerDay(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
             if (startdate == null && enddate == null)
             {

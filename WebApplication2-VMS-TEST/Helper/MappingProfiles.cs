@@ -21,6 +21,9 @@ namespace WebApplication2_VMS_TEST.Helper
             CreateMap<VehicleModel, VehicleDto>();
             CreateMap<VehicleDto, VehicleModel>();
 
+            CreateMap<VehicleModel, VehiclePostDto>();
+            CreateMap<VehiclePostDto, VehicleModel>();
+
             CreateMap<DailyActivityDto, DailyActivityModel>();
             CreateMap<DailyActivityModel, DailyActivityDto>();
 

@@ -6,7 +6,7 @@ namespace WebApplication2_VMS_TEST.Dto
 {
     public class DailyActivityDto
     {
-        public int DailyActivityId { get; set; }
+        //public int DailyActivityId { get; set; }
 
         public int VehicleId { get; set; }
 

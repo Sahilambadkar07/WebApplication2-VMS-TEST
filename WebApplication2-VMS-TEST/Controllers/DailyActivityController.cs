@@ -93,13 +93,13 @@ namespace WebApplication2_VMS_TEST.Controllers
                 return BadRequest(ModelState);
             }
 
-            var activity = _dailyActivityRepository.GetDailyActivity().Where(c => c.DailyActivityId == dailyActivitycreate.DailyActivityId).FirstOrDefault();
+            //var activity = _dailyActivityRepository.GetDailyActivity().Where(c => c.DailyActivityId == dailyActivitycreate.DailyActivityId).FirstOrDefault();
 
-            if (activity != null)
-            {
-                ModelState.AddModelError("", "activity Already Exists");
-                return StatusCode(422, ModelState);
-            }
+            //if (activity != null)
+            //{
+            //    ModelState.AddModelError("", "activity Already Exists");
+            //    return StatusCode(422, ModelState);
+            //}
 
             if (!ModelState.IsValid)
             {

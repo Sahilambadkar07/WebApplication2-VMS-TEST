@@ -9,7 +9,7 @@ namespace WebApplication2_VMS_TEST.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class VehicleController : Controller
     {
         private readonly IVehicleRepository _vehicleRepository;
@@ -22,7 +22,7 @@ namespace WebApplication2_VMS_TEST.Controllers
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<VehicleModel>))]
         public IActionResult GetVehicle()
@@ -40,10 +40,10 @@ namespace WebApplication2_VMS_TEST.Controllers
         public IActionResult GetVehicleByUserId(int UserId)
         {
             var vehicle = _mapper.Map<List<VehicleDto>>(_vehicleRepository.GetVehicleByUserId(UserId));
-            if (!_vehicleRepository.VehicleExist(UserId))
-            {
-                return NotFound();
-            }
+            //if (!_vehicleRepository.VehicleExist(UserId))
+            //{
+            //    return NotFound();
+            //}
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -68,10 +68,10 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(vehicle);
         }
 
-        [HttpPost]
+        [HttpPost("CreateVehicle")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateVehicle([FromBody] VehicleDto vehiclecreate)
+        public IActionResult CreateVehicle([FromBody] VehiclePostDto vehiclecreate)
         {
             if (vehiclecreate == null)
             {
@@ -79,13 +79,13 @@ namespace WebApplication2_VMS_TEST.Controllers
                 return BadRequest(ModelState);
             }
 
-            var vehicle = _vehicleRepository.GetVehicle().Where(c => c.VehicleId == vehiclecreate.VehicleId).FirstOrDefault();
+            //var vehicle = _vehicleRepository.GetVehicle().Where(c => c.VehicleId == vehiclecreate.VehicleId).FirstOrDefault();
             
-            if (vehicle != null)
-            {
-                ModelState.AddModelError("", "vehicle Already Exists");
-                return StatusCode(422, ModelState);
-            }
+            //if (vehicle != null)
+            //{
+            //    ModelState.AddModelError("", "vehicle Already Exists");
+            //    return StatusCode(422, ModelState);
+            //}
 
             if (!ModelState.IsValid)
             {
