@@ -17,7 +17,7 @@ import { AppContext } from '../../App';
 import moment from "moment";
 
 
-export default function MaxWidthDialog() {
+export default function MaxWidthDialog({setRows}) {
     const [open, setOpen] = React.useState(false);
     const [fullWidth, setFullWidth] = React.useState(true);
     const [maxWidth, setMaxWidth] = React.useState('xs');

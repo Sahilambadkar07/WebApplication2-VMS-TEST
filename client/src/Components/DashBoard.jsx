@@ -104,7 +104,7 @@ const DashBoard = () => {
                 alignSelf:'flex-end' 
             }} >
                 
-            <AddVehicleForm />
+            <AddVehicleForm setRows={setRows} />
             </div>
             <VehiclesTable  rows={rows} />
         </div>
