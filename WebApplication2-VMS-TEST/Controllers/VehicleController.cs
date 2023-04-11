@@ -106,7 +106,7 @@ namespace WebApplication2_VMS_TEST.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return Ok("Successfully Created");
+            return Ok(_vehicleRepository.GetVehicleById(vehicleMap.VehicleId));
         }
     }
 }
