@@ -17,6 +17,18 @@ import { AppContext } from '../../App';
 import moment from "moment";
 
 
+
+function createData(vehicleId ,vehicleNumber, vehicleType, isSmartVehicle, lastServiceDate) {
+    return {
+        vehicleId,
+        vehicleNumber,
+        vehicleType,
+        isSmartVehicle,
+        lastServiceDate
+    }
+}
+
+
 export default function MaxWidthDialog({setRows}) {
     const [open, setOpen] = React.useState(false);
     const [fullWidth, setFullWidth] = React.useState(true);
@@ -82,6 +94,16 @@ export default function MaxWidthDialog({setRows}) {
             })
 
             console.log(res);
+            const data = await res.json();
+            setRows((pre)=>{
+                return [...pre, createData(
+                    data.vehicleId,
+                    data.vehicleNumber,
+                    data.vehicleType,
+                    data.isSmartVehicle,
+                    data.lastServiceDate
+                )]
+            })
 
             setFormData({
                 "userId": rootUser.userId,
