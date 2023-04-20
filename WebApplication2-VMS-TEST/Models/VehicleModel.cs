@@ -49,7 +49,8 @@ namespace WebApplication2_VMS_TEST.Models
 
         public virtual ICollection<DailyActivityModel> DailyActivities { get; set; }
 
-        
         public virtual ICollection<MaintenanceExpenseModel> MaintenanceExpenses { get; set; }
+
+        public virtual ICollection<FuelModel> FuelActivities { get; set; }
     }
 }

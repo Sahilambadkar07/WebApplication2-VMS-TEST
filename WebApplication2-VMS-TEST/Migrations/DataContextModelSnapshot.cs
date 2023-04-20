@@ -36,15 +36,6 @@ namespace WebApplication2_VMS_TEST.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("FuelCost")
-                        .HasColumnType("decimal(18,4)");
-
-                    b.Property<decimal>("FuelFilled")
-                        .HasColumnType("decimal(18,4)");
-
-                    b.Property<decimal>("MaintenanceExpense")
-                        .HasColumnType("decimal(18,4)");
-
                     b.Property<int>("OdometerReading")
                         .HasColumnType("int");
 
@@ -64,6 +55,33 @@ namespace WebApplication2_VMS_TEST.Migrations
                     b.ToTable("DailyActivities");
                 });
 
+            modelBuilder.Entity("WebApplication2_VMS_TEST.Models.FuelModel", b =>
+                {
+                    b.Property<int>("FueEntrylId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FueEntrylId"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("FuelCost")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<decimal>("FuelFilled")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FueEntrylId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("FuelActivities");
+                });
+
             modelBuilder.Entity("WebApplication2_VMS_TEST.Models.MaintenanceExpenseModel", b =>
                 {
                     b.Property<int>("MaintenanceExpenseId")
@@ -72,11 +90,11 @@ namespace WebApplication2_VMS_TEST.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaintenanceExpenseId"));
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("ExpenseAmount")
                         .HasColumnType("decimal(18,4)");
-
-                    b.Property<DateTime>("ExpenseDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("ExpenseDescription")
                         .IsRequired()
@@ -178,6 +196,17 @@ namespace WebApplication2_VMS_TEST.Migrations
                     b.Navigation("Vehicle");
                 });
 
+            modelBuilder.Entity("WebApplication2_VMS_TEST.Models.FuelModel", b =>
+                {
+                    b.HasOne("WebApplication2_VMS_TEST.Models.VehicleModel", "Vehicle")
+                        .WithMany("FuelActivities")
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
+                });
+
             modelBuilder.Entity("WebApplication2_VMS_TEST.Models.MaintenanceExpenseModel", b =>
                 {
                     b.HasOne("WebApplication2_VMS_TEST.Models.VehicleModel", "Vehicle")
@@ -208,6 +237,8 @@ namespace WebApplication2_VMS_TEST.Migrations
             modelBuilder.Entity("WebApplication2_VMS_TEST.Models.VehicleModel", b =>
                 {
                     b.Navigation("DailyActivities");
+
+                    b.Navigation("FuelActivities");
 
                     b.Navigation("MaintenanceExpenses");
                 });

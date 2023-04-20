@@ -63,10 +63,7 @@ namespace WebApplication2_VMS_TEST.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OdometerReading = table.Column<int>(type: "int", nullable: false),
                     RunningHours = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
-                    FuelFilled = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
-                    FuelCost = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     AmountOfFuel = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
-                    MaintenanceExpense = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     ServiceDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -81,13 +78,35 @@ namespace WebApplication2_VMS_TEST.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FuelActivities",
+                columns: table => new
+                {
+                    FueEntrylId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleId = table.Column<int>(type: "int", nullable: false),
+                    FuelFilled = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    FuelCost = table.Column<decimal>(type: "decimal(18,4)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FuelActivities", x => x.FueEntrylId);
+                    table.ForeignKey(
+                        name: "FK_FuelActivities_Vehicles_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "Vehicles",
+                        principalColumn: "VehicleId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MaintenanceExpenses",
                 columns: table => new
                 {
                     MaintenanceExpenseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     VehicleId = table.Column<int>(type: "int", nullable: false),
-                    ExpenseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ExpenseDescription = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ExpenseAmount = table.Column<decimal>(type: "decimal(18,4)", nullable: false)
                 },
@@ -108,6 +127,11 @@ namespace WebApplication2_VMS_TEST.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FuelActivities_VehicleId",
+                table: "FuelActivities",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MaintenanceExpenses_VehicleId",
                 table: "MaintenanceExpenses",
                 column: "VehicleId");
@@ -123,6 +147,9 @@ namespace WebApplication2_VMS_TEST.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DailyActivities");
+
+            migrationBuilder.DropTable(
+                name: "FuelActivities");
 
             migrationBuilder.DropTable(
                 name: "MaintenanceExpenses");

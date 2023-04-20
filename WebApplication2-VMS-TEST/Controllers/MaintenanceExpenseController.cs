@@ -58,7 +58,7 @@ namespace WebApplication2_VMS_TEST.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateMaintenanceExpense([FromBody] MaintenanceExpensesDto maintenanceExpensecreate)
+        public IActionResult CreateMaintenanceExpense([FromBody] MaintenanceExpensePostDto maintenanceExpensecreate)
         {
             if (maintenanceExpensecreate == null)
             {

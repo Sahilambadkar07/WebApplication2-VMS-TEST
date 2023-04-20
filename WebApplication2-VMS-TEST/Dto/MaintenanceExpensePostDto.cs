@@ -1,12 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using WebApplication2_VMS_TEST.Models;
-
-namespace WebApplication2_VMS_TEST.Dto
+﻿namespace WebApplication2_VMS_TEST.Dto
 {
-    public class MaintenanceExpensesDto
+    public class MaintenanceExpensePostDto
     {
-        //public int MaintenanceExpenseId { get; set; }
+        public int MaintenanceExpenseId { get; set; }
 
         public int VehicleId { get; set; }
 

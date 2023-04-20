@@ -17,32 +17,18 @@ namespace WebApplication2_VMS_TEST.Data
         public DbSet<VehicleModel> Vehicles { get; set; }
         public DbSet<DailyActivityModel> DailyActivities { get; set; }
         public DbSet<MaintenanceExpenseModel> MaintenanceExpenses { get; set; }
+        public DbSet<FuelModel> FuelActivities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DailyActivityModel>()
-                .Property(p => p.AmountOfFuel)
-                .HasColumnType("decimal(18,4)");
-
-            modelBuilder.Entity<DailyActivityModel>()
-                .Property(p => p.MaintenanceExpense)
-                .HasColumnType("decimal(18,4)");
-
-            modelBuilder.Entity<DailyActivityModel>()
-                .Property(p => p.RunningHours)
-                .HasColumnType("decimal(18,4)");
-
-            modelBuilder.Entity<DailyActivityModel>()
-                .Property(p => p.FuelFilled)
-                .HasColumnType("decimal(18,4)");
-
-            modelBuilder.Entity<DailyActivityModel>()
-                .Property(p => p.FuelCost)
-                .HasColumnType("decimal(18,4)");
-
-            modelBuilder.Entity<MaintenanceExpenseModel>()
-               .Property(p => p.ExpenseAmount)
+            modelBuilder.Entity<VehicleModel>()
+               .Property(p => p.LastServiceCharge)
                .HasColumnType("decimal(18,4)");
+            
+            modelBuilder.Entity<VehicleModel>()
+                .HasOne(v => v.Users)
+                .WithMany(u => u.Vehicles)
+                .HasForeignKey(v => v.UserId);
 
             modelBuilder.Entity<VehicleModel>()
                .Property(p => p.FuelCapacity)
@@ -56,24 +42,47 @@ namespace WebApplication2_VMS_TEST.Data
                .Property(p => p.FuelAmount)
                .HasColumnType("decimal(18,4)");
 
-            modelBuilder.Entity<VehicleModel>()
-               .Property(p => p.LastServiceCharge)
-               .HasColumnType("decimal(18,4)");
 
-            modelBuilder.Entity<VehicleModel>()
-                .HasOne(v => v.Users)
-                .WithMany(u => u.Vehicles)
-                .HasForeignKey(v => v.UserId);
+
+
+            modelBuilder.Entity<DailyActivityModel>()
+                .Property(p => p.RunningHours)
+                .HasColumnType("decimal(18,4)");
 
             modelBuilder.Entity<DailyActivityModel>()
                 .HasOne(d => d.Vehicle)
                 .WithMany(v => v.DailyActivities)
                 .HasForeignKey(d => d.VehicleId);
 
+            modelBuilder.Entity<DailyActivityModel>()
+                .Property(p => p.AmountOfFuel)
+                .HasColumnType("decimal(18,4)");
+
+            
+            
+            modelBuilder.Entity<MaintenanceExpenseModel>()
+               .Property(p => p.ExpenseAmount)
+               .HasColumnType("decimal(18,4)");
+
             modelBuilder.Entity<MaintenanceExpenseModel>()
                 .HasOne(m => m.Vehicle)
                 .WithMany(v => v.MaintenanceExpenses)
                 .HasForeignKey(m => m.VehicleId);
+           
+            
+            modelBuilder.Entity<FuelModel>()
+                .HasOne(m => m.Vehicle)
+                .WithMany(v => v.FuelActivities)
+                .HasForeignKey(m => m.VehicleId);
+            
+            modelBuilder.Entity<FuelModel>()
+                .Property(p => p.FuelFilled)
+                .HasColumnType("decimal(18,4)");
+
+            modelBuilder.Entity<FuelModel>()
+                .Property(p => p.FuelCost)
+                .HasColumnType("decimal(18,4)");
+            
 
             base.OnModelCreating(modelBuilder);
         }

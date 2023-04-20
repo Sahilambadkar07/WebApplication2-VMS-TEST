@@ -28,20 +28,13 @@ namespace WebApplication2_VMS_TEST.Models
         [Required]
         public decimal RunningHours { get; set; }
 
-        [Required]
-        public decimal FuelFilled { get; set; }
-
-        [Required]
-        public decimal FuelCost { get; set; }
+       
 
         [Required]
 
         public decimal AmountOfFuel { get; set; }
 
-        [Required]
-        public decimal MaintenanceExpense { get; set; }
-
-        public DateTime ServiceDate { get; set; }
+        
 
     }
 }

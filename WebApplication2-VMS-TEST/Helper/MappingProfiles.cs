@@ -14,6 +14,9 @@ namespace WebApplication2_VMS_TEST.Helper
             
             CreateMap<UserModel, UserDto>();
             CreateMap<UserDto, UserModel>();
+            
+            CreateMap<FuelDto, FuelModel>();
+            CreateMap<FuelModel, FuelDto>();
 
             CreateMap<UserModel, UserLoginDto>();
             CreateMap<UserLoginDto,UserModel>();
@@ -33,6 +36,9 @@ namespace WebApplication2_VMS_TEST.Helper
 
             CreateMap<MaintenanceExpenseModel, MaintenanceExpensesDto>();
             CreateMap<MaintenanceExpensesDto, MaintenanceExpenseModel>();
+            
+            CreateMap<MaintenanceExpenseModel, MaintenanceExpensePostDto>();
+            CreateMap<MaintenanceExpensePostDto, MaintenanceExpenseModel>();
 
         }
 

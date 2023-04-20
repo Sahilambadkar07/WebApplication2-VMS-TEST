@@ -45,19 +45,5 @@ namespace WebApplication2_VMS_TEST.Repository
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
-
-
-        //public int GetCurrentOdodmeterReading(int vehicleid)
-        //{
-        //    //var vehicle = _context.DailyActivities.OrderByDescending(c=>c.DailyActivityId).Select(x=>x.OdometerReading).FirstOrDefault();
-        //    var vehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid);
-        //    return vehicle.OrderByDescending(c=>c.DailyActivityId).Select(x=>x.OdometerReading).FirstOrDefault();
-        //}
-
-        //public decimal GetRemainingFuelAmount(int vehicleid)
-        //{
-        //    var vehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid);
-        //    return vehicle.OrderBy(c=>c.DailyActivityId).Select(x=>x.AmountOfFuel).FirstOrDefault();   
-        //}
     }
 }

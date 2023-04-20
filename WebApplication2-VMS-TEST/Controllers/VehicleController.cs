@@ -79,14 +79,6 @@ namespace WebApplication2_VMS_TEST.Controllers
                 return BadRequest(ModelState);
             }
 
-            //var vehicle = _vehicleRepository.GetVehicle().Where(c => c.VehicleId == vehiclecreate.VehicleId).FirstOrDefault();
-            
-            //if (vehicle != null)
-            //{
-            //    ModelState.AddModelError("", "vehicle Already Exists");
-            //    return StatusCode(422, ModelState);
-            //}
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

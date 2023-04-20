@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2_VMS_TEST.Data;
 using WebApplication2_VMS_TEST.Dto;
 using WebApplication2_VMS_TEST.Interfaces;
 using WebApplication2_VMS_TEST.Models;
-using WebApplication2_VMS_TEST.Repository;
 
 namespace WebApplication2_VMS_TEST.Controllers
 {
@@ -31,7 +28,7 @@ namespace WebApplication2_VMS_TEST.Controllers
             var activity = _mapper.Map<List<DailyActivityDto>>(_dailyActivityRepository.GetDailyActivity());
             if(!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  
+                return BadRequest(ModelState); 
             }
             return Ok(activity);
         }
@@ -66,21 +63,7 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(activity);
         }
 
-        //[HttpGet("GetCurrentOdodmeterReading")]
-        //[ProducesResponseType(200, Type = typeof(int))]
-        //public IActionResult GetCurrentOdodmeterReading([FromQuery] int vehicleid)
-        //{
-        //    var odo  = _dailyActivityRepository.GetCurrentOdodmeterReading(vehicleid);
-        //    return Ok(odo);
-        //}
-
-        //[HttpGet("GetRemainingFuelAmount")]
-        //[ProducesResponseType(200, Type = typeof(decimal))]
-        //public IActionResult GetRemainingFuelAmount(int vehicleid)
-        //{
-        //    var fuelAmount = _dailyActivityRepository.GetRemainingFuelAmount(ve);
-        //    return Ok(fuelAmount);
-        //}
+      
 
         [HttpPost]
         [ProducesResponseType(204)]

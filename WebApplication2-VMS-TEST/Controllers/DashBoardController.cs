@@ -15,11 +15,19 @@ namespace WebApplication2_VMS_TEST.Controllers
     public class DashBoardController : Controller
     {
         private readonly IDashBoardRepository _dashboardRepository;
+        private readonly IFuelRepository _fuelRepository;
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IDailyActivityRepository _dailyActivityRepository;
         private readonly IMapper _mapper;
-        public DashBoardController(IDashBoardRepository dashboardRepository, IVehicleRepository vehicleRepository, IDailyActivityRepository dailyActivityRepository, IMapper mapper)
+        public DashBoardController(
+
+            IDashBoardRepository dashboardRepository,
+            IVehicleRepository vehicleRepository,
+            IDailyActivityRepository dailyActivityRepository,
+            IFuelRepository fuelRepository,
+            IMapper mapper)
         {
+            _fuelRepository = fuelRepository;
             _dashboardRepository = dashboardRepository;
             _vehicleRepository = vehicleRepository;
             _dailyActivityRepository = dailyActivityRepository;
@@ -120,16 +128,29 @@ namespace WebApplication2_VMS_TEST.Controllers
             var expense = _dashboardRepository.MaintExpenses(vehicleid, startdate, enddate);
             return Ok(expense);
         }
-        
+
         // date filtering is remaining
 
         [HttpGet("Tabularview/{vehicleid}/{startdate}/{enddate}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<DailyActivityModel>))]
         public IActionResult GetTabularView(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
+            int i = 0;
             var dailyActivities = _dailyActivityRepository.GetDailyActivityByVehicleId(vehicleid);
+            var fuelActivities = _fuelRepository.GetFuelActivityByVehicleId(vehicleid);
+            var fuelActivitiesDto = _mapper.Map<List<FuelDto>>(fuelActivities);
             var tabularViewDtoList = _mapper.Map<List<TabularViewDto>>(dailyActivities);
-            var prevdto = tabularViewDtoList[0];
+            dynamic prevdto = null;
+            dynamic prevfuelActi = null;
+            if (tabularViewDtoList.Any())
+            {
+                prevdto = tabularViewDtoList[0];
+            }
+
+            if (fuelActivities.Any())
+            {
+                prevfuelActi = fuelActivitiesDto[0];
+            }
             int flag = 0;
             foreach (var dto in tabularViewDtoList)
             {
@@ -141,8 +162,11 @@ namespace WebApplication2_VMS_TEST.Controllers
                 else
                 {
                     dto.KmRun = dto.OdometerReading - prevdto.OdometerReading;
+
                     prevdto = dto;
                 }
+                dto.FuelFilled = _fuelRepository.GetFuelFilledEntryByDate(dto.Date,vehicleid);
+
             }
             return Ok(tabularViewDtoList);
         }
@@ -170,7 +194,7 @@ namespace WebApplication2_VMS_TEST.Controllers
                 enddate = new DateTime(start.Year, start.Month, day);
             }
             var totalexpperdat = _dashboardRepository.TotalExpPerDay(vehicleid, startdate, enddate);
-            return Ok(totalexpperdat);  
+            return Ok(totalexpperdat);
         }
 
         [HttpGet("RsPerKm/{vehicleid}/{startdate}/{enddate}")]
