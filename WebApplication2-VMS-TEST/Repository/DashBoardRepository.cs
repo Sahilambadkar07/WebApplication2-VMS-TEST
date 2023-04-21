@@ -10,7 +10,7 @@ namespace WebApplication2_VMS_TEST.Repository
         {
             _context = context;
         }
-        //================= [ SECTION - A ] =================\\
+
         public int GetCurrentOdodmeterReading(int vehicleid)
         {
             var vehicle = _context.DailyActivities.Where(x => x.VehicleId == vehicleid);
@@ -38,7 +38,6 @@ namespace WebApplication2_VMS_TEST.Repository
                 return 0;
             }
             return (odo / sum);
-
         }
 
         public decimal FuelExpenses(int vehicleid, DateTime? startdate, DateTime? enddate)
@@ -74,7 +73,7 @@ namespace WebApplication2_VMS_TEST.Repository
             {
                 return 0;
             }
-            var maintexp = _context.MaintenanceExpenses.Sum(x => x.ExpenseAmount);
+            var maintexp = _context.MaintenanceExpenses.Where(c => c.VehicleId == vehicleid).Sum(x => x.ExpenseAmount);
             var serviceexp = _context.Vehicles.Where(x => x.VehicleId == vehicleid).Select(c => c.LastServiceCharge).FirstOrDefault();
             var fuelexp = fuelactivityOfVehicle.Sum(x => x.FuelCost);
             var totalexp = fuelexp + serviceexp + maintexp;

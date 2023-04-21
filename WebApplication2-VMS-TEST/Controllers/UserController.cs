@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using WebApplication2_VMS_TEST.Dto;
 using WebApplication2_VMS_TEST.Interfaces;
 using WebApplication2_VMS_TEST.Models;

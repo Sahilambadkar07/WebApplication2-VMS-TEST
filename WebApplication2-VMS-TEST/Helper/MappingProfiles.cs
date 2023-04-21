@@ -8,7 +8,6 @@ namespace WebApplication2_VMS_TEST.Helper
 {
     public class MappingProfiles : Profile
     {
-        private readonly DataContext _context;
         public MappingProfiles()
         {
             

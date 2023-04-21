@@ -5,11 +5,8 @@ namespace WebApplication2_VMS_TEST.Dto
 {
     public class VehiclePostDto
     {
-        //public int VehicleId { get; set; }
 
         public int UserId { get; set; }
-
-        //public virtual UserModel Users { get; set; }
 
         public string VehicleType { get; set; }
 

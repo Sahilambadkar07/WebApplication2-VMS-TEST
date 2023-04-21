@@ -2,13 +2,10 @@
 {
     public class MaintenanceExpensePostDto
     {
-        public int MaintenanceExpenseId { get; set; }
 
         public int VehicleId { get; set; }
 
-        //public virtual VehicleModel Vehicle { get; set; }
-
-        public DateTime ExpenseDate { get; set; }
+        public DateTime Date { get; set; }
 
         public string ExpenseDescription { get; set; }
 

@@ -23,7 +23,6 @@ namespace WebApplication2_VMS_TEST.Repository
             return Save();
         }
 
-
         public bool Save()
         {
             var saved = _context.SaveChanges();

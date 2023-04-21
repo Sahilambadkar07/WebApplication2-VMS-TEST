@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2_VMS_TEST.Dto;
-using WebApplication2_VMS_TEST.Interfaces;
 using WebApplication2_VMS_TEST.Models;
+using WebApplication2_VMS_TEST.Interfaces;
 
 namespace WebApplication2_VMS_TEST.Controllers
 {
@@ -49,6 +49,7 @@ namespace WebApplication2_VMS_TEST.Controllers
             }
             return Ok(activity);
         }
+
         [HttpGet("GetDaily_Activity_By_VehicleId/{vehicleid}")]
         [ProducesResponseType(200, Type = typeof(DailyActivityModel))]
 
@@ -63,8 +64,6 @@ namespace WebApplication2_VMS_TEST.Controllers
             return Ok(activity);
         }
 
-      
-
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -75,14 +74,6 @@ namespace WebApplication2_VMS_TEST.Controllers
                 Console.WriteLine("vehicle null create");
                 return BadRequest(ModelState);
             }
-
-            //var activity = _dailyActivityRepository.GetDailyActivity().Where(c => c.DailyActivityId == dailyActivitycreate.DailyActivityId).FirstOrDefault();
-
-            //if (activity != null)
-            //{
-            //    ModelState.AddModelError("", "activity Already Exists");
-            //    return StatusCode(422, ModelState);
-            //}
 
             if (!ModelState.IsValid)
             {

@@ -21,6 +21,7 @@ namespace WebApplication2_VMS_TEST.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //============================= VEHICLE MODEL ==============================
             modelBuilder.Entity<VehicleModel>()
                .Property(p => p.LastServiceCharge)
                .HasColumnType("decimal(18,4)");
@@ -43,7 +44,7 @@ namespace WebApplication2_VMS_TEST.Data
                .HasColumnType("decimal(18,4)");
 
 
-
+            //============================= DAILYACTIVTY MODEL ==============================
 
             modelBuilder.Entity<DailyActivityModel>()
                 .Property(p => p.RunningHours)
@@ -58,8 +59,9 @@ namespace WebApplication2_VMS_TEST.Data
                 .Property(p => p.AmountOfFuel)
                 .HasColumnType("decimal(18,4)");
 
-            
-            
+
+            //============================= MAINTENANCE MODEL ==============================
+
             modelBuilder.Entity<MaintenanceExpenseModel>()
                .Property(p => p.ExpenseAmount)
                .HasColumnType("decimal(18,4)");
@@ -68,8 +70,9 @@ namespace WebApplication2_VMS_TEST.Data
                 .HasOne(m => m.Vehicle)
                 .WithMany(v => v.MaintenanceExpenses)
                 .HasForeignKey(m => m.VehicleId);
-           
-            
+
+            //============================= FUEL MODEL ==============================
+
             modelBuilder.Entity<FuelModel>()
                 .HasOne(m => m.Vehicle)
                 .WithMany(v => v.FuelActivities)

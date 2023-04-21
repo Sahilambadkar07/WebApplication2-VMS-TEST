@@ -18,7 +18,7 @@ namespace WebApplication2_VMS_TEST.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private IConfiguration _config;
-        public LoginController(IConfiguration config, IUserRepository userRepository ,IMapper mapper)
+        public LoginController(IConfiguration config, IUserRepository userRepository, IMapper mapper)
         {
             _config = config;
             _mapper = mapper;
@@ -28,15 +28,12 @@ namespace WebApplication2_VMS_TEST.Controllers
         private UserModel? AuthenticateUser(UserLoginDto user)
         {
             var _user = (_userRepository.GetUserByUsername(user.Username));
-            //var _user = _mapper.Map<UserDto>(_userRepository.GetUserByUsername(user.Username));
-            
             var passwordHasher = new PasswordHasher<UserLoginDto>();
 
             var success = (passwordHasher.VerifyHashedPassword(null, _user.Password, user.Password) == PasswordVerificationResult.Success);
-            if (_user == null )
+            if (_user == null)
             {
                 return null;
-                // if nulls then what ..implemet it later
             }
             if (!success)
             {
@@ -68,10 +65,10 @@ namespace WebApplication2_VMS_TEST.Controllers
             //return Ok(_user);
             if (_user != null)
             {
-                token =  GenerateToken(_mapper.Map<UserLoginDto>(_user));
+                token = GenerateToken(_mapper.Map<UserLoginDto>(_user));
                 response = Ok(new { token = token });
             }
-            return Ok( new { token = token,user = _user } );
+            return Ok(new { token = token, user = _user });
         }
     }
 }

@@ -10,7 +10,6 @@ namespace WebApplication2_VMS_TEST.Interfaces
 
         public bool ExpenseExist(int id);
 
-
         bool CreateMaintenanceExpense(MaintenanceExpenseModel maintenanceExpense);
 
         bool Save();

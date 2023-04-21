@@ -66,13 +66,6 @@ namespace WebApplication2_VMS_TEST.Controllers
                 return BadRequest(ModelState);
             }
 
-            var expense = _maintenanceExpenseRepository.GetExpense().Where(c => c.MaintenanceExpenseId == maintenanceExpensecreate.MaintenanceExpenseId).FirstOrDefault();
-
-            if (expense != null)
-            {
-                ModelState.AddModelError("", "expense Already Exists");
-                return StatusCode(422, ModelState);
-            }
 
             if (!ModelState.IsValid)
             {

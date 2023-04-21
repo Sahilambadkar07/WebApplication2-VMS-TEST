@@ -9,8 +9,6 @@ namespace WebApplication2_VMS_TEST.Dto
 
         public int UserId { get; set; }
 
-        //public virtual UserModel Users { get; set; }
-
         public string VehicleType { get; set; }
 
         public string VehicleNumber { get; set; }

@@ -4,8 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
 namespace WebApplication2_VMS_TEST.Models
 {
     public class DailyActivityModel
@@ -23,18 +21,15 @@ namespace WebApplication2_VMS_TEST.Models
         public DateTime Date { get; set; }
 
         [Required]
-        public int OdometerReading { get; set; } //validation that vehicle.odo <= dailyact.odo
+        public int OdometerReading { get; set; }
 
         [Required]
         public decimal RunningHours { get; set; }
 
-       
-
         [Required]
-
         public decimal AmountOfFuel { get; set; }
 
-        
+
 
     }
 }

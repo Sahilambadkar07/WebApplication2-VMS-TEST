@@ -1,7 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-
 namespace WebApplication2_VMS_TEST.Models
 {
      public class UserModel
@@ -17,7 +16,6 @@ namespace WebApplication2_VMS_TEST.Models
         [StringLength(50)]
         public string Password { get; set; }
 
-        
         public virtual ICollection<VehicleModel> Vehicles { get; set; }
     }
 }

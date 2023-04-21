@@ -25,7 +25,5 @@ namespace WebApplication2_VMS_TEST.Interfaces
 
         public decimal AvgMaintPerDay(int vehicleid, DateTime? startdate, DateTime? enddate);
 
-        //IEnumerable<TabularViewDto> GetDailyActivitiesWithDTO();
-        //public Task<List<DailyActivityModel>> GetAllAsync(int vehicleid);
     }
 }

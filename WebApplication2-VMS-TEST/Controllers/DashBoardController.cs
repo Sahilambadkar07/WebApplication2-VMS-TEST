@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Headers;
 using WebApplication2_VMS_TEST.Dto;
 using WebApplication2_VMS_TEST.Interfaces;
 using WebApplication2_VMS_TEST.Models;
-using WebApplication2_VMS_TEST.Repository;
 
 namespace WebApplication2_VMS_TEST.Controllers
 {
@@ -135,7 +132,6 @@ namespace WebApplication2_VMS_TEST.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<DailyActivityModel>))]
         public IActionResult GetTabularView(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
-            int i = 0;
             var dailyActivities = _dailyActivityRepository.GetDailyActivityByVehicleId(vehicleid);
             var fuelActivities = _fuelRepository.GetFuelActivityByVehicleId(vehicleid);
             var fuelActivitiesDto = _mapper.Map<List<FuelDto>>(fuelActivities);
@@ -276,23 +272,23 @@ namespace WebApplication2_VMS_TEST.Controllers
         [ProducesResponseType(200, Type = typeof(decimal))]
         public IActionResult MaintCostPerDay(int vehicleid, DateTime? startdate = null, DateTime? enddate = null)
         {
-            if (startdate == null && enddate == null)
-            {
-                enddate = DateTime.Now;
-                DateTime end = enddate.Value;
-                startdate = new DateTime(end.Year, end.Month, 1);
-            }
-            if (startdate == null)
-            {
-                DateTime end = enddate.Value;
-                startdate = new DateTime(end.Year, end.Month, 1);
-            }
-            if (enddate == null)
-            {
-                DateTime start = startdate.Value;
-                int day = DateTime.DaysInMonth(start.Year, start.Month);
-                enddate = new DateTime(start.Year, start.Month, day);
-            }
+            //if (startdate == null && enddate == null)
+            //{
+            //    enddate = DateTime.Now;
+            //    DateTime end = enddate.Value;
+            //    startdate = new DateTime(end.Year, end.Month, 1);
+            //}
+            //if (startdate == null)
+            //{
+            //    DateTime end = enddate.Value;
+            //    startdate = new DateTime(end.Year, end.Month, 1);
+            //}
+            //if (enddate == null)
+            //{
+            //    DateTime start = startdate.Value;
+            //    int day = DateTime.DaysInMonth(start.Year, start.Month);
+            //    enddate = new DateTime(start.Year, start.Month, day);
+            //}
             var maintcostperday = _dashboardRepository.AvgMaintPerDay(vehicleid, startdate, enddate);
             return Ok(maintcostperday);
         }

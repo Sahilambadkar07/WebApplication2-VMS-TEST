@@ -6,9 +6,12 @@ namespace WebApplication2_VMS_TEST.Interfaces
     {
 
         ICollection<UserModel> GetUser();
+
         UserModel GetUserById(int id);
+
         UserModel GetUserByUsername(string username);
-       public bool UserExist(int id);
+        
+        public bool UserExist(int id);
 
         bool CreateUser(UserModel user);
 

@@ -44,9 +44,10 @@ builder.Services.AddCors(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options=>
+builder.Services.AddSwaggerGen(options =>
 {
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme { 
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
         Description = "Standard Authorization header using Bearer scheme",
         In = ParameterLocation.Header,
         Name = "Authorization",
@@ -100,16 +101,3 @@ app.MapControllers();
 
 app.Run();
 
-//UserModel user = new UserModel()
-//{
-//    UserId = 1,
-//    Username = "VMSTest1",
-//    Password = "password",
-//};
-
-//DataContext dc = new DataContext();
-
-//dc.Users.Add(user);
-//dc.SaveChanges();
-//Console.WriteLine("Press Any Key To Continue");
-//Console.ReadKey();
